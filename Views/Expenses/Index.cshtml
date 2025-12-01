@@ -1,0 +1,85 @@
+@model ExpenseTracker.Models.ExpenseIndexViewModel
+
+@{
+    ViewData["Title"] = "Expenses";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Expenses</h1>
+    <div>
+        <a class="btn btn-primary me-2" asp-action="Create">Create New</a>
+        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Home</a>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <div class="card text-bg-light mb-2">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Total</h6>
+                <h4 class="card-title">@Model.TotalAmount.ToString("C")</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-light mb-2">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">This Month</h6>
+                <h4 class="card-title">@Model.MonthAmount.ToString("C")</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <form class="row g-2" method="get" asp-action="Index">
+            <div class="col-12 d-flex gap-2">
+                <input class="form-control" type="text" name="q" placeholder="Search description..." value="@Model.Query" />
+                <input class="form-control" type="text" name="category" placeholder="Category" value="@Model.Category" />
+            </div>
+            <div class="col-6">
+                <input class="form-control" type="date" name="startDate" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" />
+            </div>
+            <div class="col-6">
+                <input class="form-control" type="date" name="endDate" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" />
+            </div>
+            <div class="col-12 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                <a class="btn btn-outline-secondary w-100" asp-action="Index">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="min-width:120px">Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th class="text-end" style="min-width:120px">Amount</th>
+                <th class="text-end" style="min-width:140px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Expenses)
+        {
+            <tr>
+                <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                <td>@item.Category</td>
+                <td class="text-truncate" style="max-width: 420px;">@item.Description</td>
+                <td class="text-end">@item.Amount.ToString("C")</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary me-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-sm btn-outline-secondary me-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Expenses.Any())
+{
+    <div class="alert alert-info mt-3">No expenses found. Use the filter or create a new expense.</div>
+}

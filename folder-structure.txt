@@ -1,0 +1,480 @@
+Folder PATH listing
+Volume serial number is 84EA-4175
+C:.
+³   appsettings.Development.json
+³   appsettings.json
+³   expenses.db
+³   folder-structure.txt
+³   Program.cs
+³   SCD-EXPENSE-TRACKER.csproj
+³   SCD-EXPENSE-TRACKER.csproj.user
+³   SCD-EXPENSE-TRACKER.sln
+³   
+ÃÄÄÄbin
+³   ÃÄÄÄDebug
+³   ³   ÀÄÄÄnet8.0
+³   ³       ³   appsettings.Development.json
+³   ³       ³   appsettings.json
+³   ³       ³   expenses.db
+³   ³       ³   Humanizer.dll
+³   ³       ³   Microsoft.Bcl.AsyncInterfaces.dll
+³   ³       ³   Microsoft.CodeAnalysis.CSharp.dll
+³   ³       ³   Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+³   ³       ³   Microsoft.CodeAnalysis.dll
+³   ³       ³   Microsoft.CodeAnalysis.Workspaces.dll
+³   ³       ³   Microsoft.Data.Sqlite.dll
+³   ³       ³   Microsoft.EntityFrameworkCore.Abstractions.dll
+³   ³       ³   Microsoft.EntityFrameworkCore.Design.dll
+³   ³       ³   Microsoft.EntityFrameworkCore.dll
+³   ³       ³   Microsoft.EntityFrameworkCore.Relational.dll
+³   ³       ³   Microsoft.EntityFrameworkCore.Sqlite.dll
+³   ³       ³   Microsoft.Extensions.Caching.Memory.dll
+³   ³       ³   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+³   ³       ³   Microsoft.Extensions.DependencyInjection.dll
+³   ³       ³   Microsoft.Extensions.DependencyModel.dll
+³   ³       ³   Microsoft.Extensions.Logging.Abstractions.dll
+³   ³       ³   Microsoft.Extensions.Logging.dll
+³   ³       ³   Microsoft.Extensions.Options.dll
+³   ³       ³   Mono.TextTemplating.dll
+³   ³       ³   SCD-EXPENSE-TRACKER.deps.json
+³   ³       ³   SCD-EXPENSE-TRACKER.dll
+³   ³       ³   SCD-EXPENSE-TRACKER.exe
+³   ³       ³   SCD-EXPENSE-TRACKER.pdb
+³   ³       ³   SCD-EXPENSE-TRACKER.runtimeconfig.json
+³   ³       ³   SCD-EXPENSE-TRACKER.staticwebassets.endpoints.json
+³   ³       ³   SCD-EXPENSE-TRACKER.staticwebassets.runtime.json
+³   ³       ³   SQLitePCLRaw.batteries_v2.dll
+³   ³       ³   SQLitePCLRaw.core.dll
+³   ³       ³   SQLitePCLRaw.provider.e_sqlite3.dll
+³   ³       ³   System.CodeDom.dll
+³   ³       ³   System.Composition.AttributedModel.dll
+³   ³       ³   System.Composition.Convention.dll
+³   ³       ³   System.Composition.Hosting.dll
+³   ³       ³   System.Composition.Runtime.dll
+³   ³       ³   System.Composition.TypedParts.dll
+³   ³       ³   
+³   ³       ÃÄÄÄcs
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄde
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄes
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄfr
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄit
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄja
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄko
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄpl
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄpt-BR
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄru
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄruntimes
+³   ³       ³   ÃÄÄÄandroid-arm
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄandroid-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄandroid-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄandroid-x86
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄbrowser-wasm
+³   ³       ³   ³   ÀÄÄÄnativeassets
+³   ³       ³   ³       ÀÄÄÄnet8.0
+³   ³       ³   ³               e_sqlite3.a
+³   ³       ³   ³               
+³   ³       ³   ÃÄÄÄios-arm
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.a
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄios-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.a
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄiossimulator-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.a
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄiossimulator-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.a
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄiossimulator-x86
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.a
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-arm
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-armel
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-mips64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-musl-arm
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-musl-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-musl-riscv64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-musl-s390x
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-musl-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-ppc64le
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-riscv64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-s390x
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄlinux-x86
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.so
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄmaccatalyst-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.dylib
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄmaccatalyst-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.dylib
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄosx-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.dylib
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄosx-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           libe_sqlite3.dylib
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄwin-arm64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.dll
+³   ³       ³   ³           
+³   ³       ³   ÃÄÄÄwin-x64
+³   ³       ³   ³   ÀÄÄÄnative
+³   ³       ³   ³           e_sqlite3.dll
+³   ³       ³   ³           
+³   ³       ³   ÀÄÄÄwin-x86
+³   ³       ³       ÀÄÄÄnative
+³   ³       ³               e_sqlite3.dll
+³   ³       ³               
+³   ³       ÃÄÄÄtr
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÃÄÄÄwwwroot
+³   ³       ÃÄÄÄzh-Hans
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.resources.dll
+³   ³       ³       Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³       ³       
+³   ³       ÀÄÄÄzh-Hant
+³   ³               Microsoft.CodeAnalysis.CSharp.resources.dll
+³   ³               Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+³   ³               Microsoft.CodeAnalysis.resources.dll
+³   ³               Microsoft.CodeAnalysis.Workspaces.resources.dll
+³   ³               
+³   ÀÄÄÄRelease
+³       ÀÄÄÄnet8.0
+ÃÄÄÄControllers
+³       ExpensesController.cs
+³       HomeController.cs
+³       
+ÃÄÄÄData
+³       ApplicationDbContext.cs
+³       
+ÃÄÄÄModels
+³       ErrorViewModel.cs
+³       Expense.cs
+³       ExpenseIndexViewModel.cs
+³       
+ÃÄÄÄobj
+³   ³   project.assets.json
+³   ³   project.nuget.cache
+³   ³   SCD-EXPENSE-TRACKER.csproj.nuget.dgspec.json
+³   ³   SCD-EXPENSE-TRACKER.csproj.nuget.g.props
+³   ³   SCD-EXPENSE-TRACKER.csproj.nuget.g.targets
+³   ³   
+³   ÃÄÄÄDebug
+³   ³   ÀÄÄÄnet8.0
+³   ³       ³   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+³   ³       ³   ApiEndpoints.json
+³   ³       ³   apphost.exe
+³   ³       ³   rjimswa.dswa.cache.json
+³   ³       ³   rjsmcshtml.dswa.cache.json
+³   ³       ³   rjsmrazor.dswa.cache.json
+³   ³       ³   rpswa.dswa.cache.json
+³   ³       ³   SCD-EXPE.140829A0.Up2Date
+³   ³       ³   SCD-EXPENSE-TRACKER.AssemblyInfo.cs
+³   ³       ³   SCD-EXPENSE-TRACKER.AssemblyInfoInputs.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.assets.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.csproj.AssemblyReference.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.csproj.BuildWithSkipAnalyzers
+³   ³       ³   SCD-EXPENSE-TRACKER.csproj.CoreCompileInputs.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.csproj.FileListAbsolute.txt
+³   ³       ³   SCD-EXPENSE-TRACKER.dll
+³   ³       ³   SCD-EXPENSE-TRACKER.GeneratedMSBuildEditorConfig.editorconfig
+³   ³       ³   SCD-EXPENSE-TRACKER.genruntimeconfig.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.GlobalUsings.g.cs
+³   ³       ³   SCD-EXPENSE-TRACKER.MvcApplicationPartsAssemblyInfo.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.pdb
+³   ³       ³   SCD-EXPENSE-TRACKER.RazorAssemblyInfo.cache
+³   ³       ³   SCD-EXPENSE-TRACKER.RazorAssemblyInfo.cs
+³   ³       ³   staticwebassets.build.endpoints.json
+³   ³       ³   staticwebassets.build.json
+³   ³       ³   staticwebassets.build.json.cache
+³   ³       ³   staticwebassets.development.json
+³   ³       ³   staticwebassets.references.upToDateCheck.txt
+³   ³       ³   staticwebassets.removed.txt
+³   ³       ³   staticwebassets.upToDateCheck.txt
+³   ³       ³   
+³   ³       ÃÄÄÄref
+³   ³       ³       SCD-EXPENSE-TRACKER.dll
+³   ³       ³       
+³   ³       ÃÄÄÄrefint
+³   ³       ³       SCD-EXPENSE-TRACKER.dll
+³   ³       ³       
+³   ³       ÃÄÄÄscopedcss
+³   ³       ³   ÃÄÄÄbundle
+³   ³       ³   ³       SCD-EXPENSE-TRACKER.styles.css
+³   ³       ³   ³       
+³   ³       ³   ÃÄÄÄprojectbundle
+³   ³       ³   ³       SCD-EXPENSE-TRACKER.bundle.scp.css
+³   ³       ³   ³       
+³   ³       ³   ÀÄÄÄViews
+³   ³       ³       ÀÄÄÄShared
+³   ³       ³               _Layout.cshtml.rz.scp.css
+³   ³       ³               
+³   ³       ÀÄÄÄstaticwebassets
+³   ÀÄÄÄRelease
+³       ÀÄÄÄnet8.0
+³           ³   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+³           ³   SCD-EXPENSE-TRACKER.AssemblyInfo.cs
+³           ³   SCD-EXPENSE-TRACKER.AssemblyInfoInputs.cache
+³           ³   SCD-EXPENSE-TRACKER.assets.cache
+³           ³   SCD-EXPENSE-TRACKER.csproj.AssemblyReference.cache
+³           ³   SCD-EXPENSE-TRACKER.GeneratedMSBuildEditorConfig.editorconfig
+³           ³   SCD-EXPENSE-TRACKER.GlobalUsings.g.cs
+³           ³   SCD-EXPENSE-TRACKER.RazorAssemblyInfo.cache
+³           ³   SCD-EXPENSE-TRACKER.RazorAssemblyInfo.cs
+³           ³   
+³           ÃÄÄÄref
+³           ÀÄÄÄrefint
+ÃÄÄÄProperties
+³       launchSettings.json
+³       
+ÃÄÄÄViews
+³   ³   _ViewImports.cshtml
+³   ³   _ViewStart.cshtml
+³   ³   
+³   ÃÄÄÄExpenses
+³   ³       Create.cshtml
+³   ³       Delete.cshtml
+³   ³       Details.cshtml
+³   ³       Edit.cshtml
+³   ³       Index.cshtml
+³   ³       
+³   ÃÄÄÄHome
+³   ³       Index.cshtml
+³   ³       Privacy.cshtml
+³   ³       
+³   ÀÄÄÄShared
+³           Error.cshtml
+³           _Layout.cshtml
+³           _Layout.cshtml.css
+³           _ValidationScriptsPartial.cshtml
+³           
+ÀÄÄÄwwwroot
+    ³   favicon.ico
+    ³   
+    ÃÄÄÄbin
+    ³   ÃÄÄÄDebug
+    ³   ³   ÀÄÄÄnet8.0
+    ³   ÀÄÄÄRelease
+    ³       ÀÄÄÄnet8.0
+    ÃÄÄÄcss
+    ³       site.css
+    ³       
+    ÃÄÄÄjs
+    ³       site.js
+    ³       
+    ÃÄÄÄlib
+    ³   ÃÄÄÄbootstrap
+    ³   ³   ³   LICENSE
+    ³   ³   ³   
+    ³   ³   ÀÄÄÄdist
+    ³   ³       ÃÄÄÄcss
+    ³   ³       ³       bootstrap-grid.css
+    ³   ³       ³       bootstrap-grid.css.map
+    ³   ³       ³       bootstrap-grid.min.css
+    ³   ³       ³       bootstrap-grid.min.css.map
+    ³   ³       ³       bootstrap-grid.rtl.css
+    ³   ³       ³       bootstrap-grid.rtl.css.map
+    ³   ³       ³       bootstrap-grid.rtl.min.css
+    ³   ³       ³       bootstrap-grid.rtl.min.css.map
+    ³   ³       ³       bootstrap-reboot.css
+    ³   ³       ³       bootstrap-reboot.css.map
+    ³   ³       ³       bootstrap-reboot.min.css
+    ³   ³       ³       bootstrap-reboot.min.css.map
+    ³   ³       ³       bootstrap-reboot.rtl.css
+    ³   ³       ³       bootstrap-reboot.rtl.css.map
+    ³   ³       ³       bootstrap-reboot.rtl.min.css
+    ³   ³       ³       bootstrap-reboot.rtl.min.css.map
+    ³   ³       ³       bootstrap-utilities.css
+    ³   ³       ³       bootstrap-utilities.css.map
+    ³   ³       ³       bootstrap-utilities.min.css
+    ³   ³       ³       bootstrap-utilities.min.css.map
+    ³   ³       ³       bootstrap-utilities.rtl.css
+    ³   ³       ³       bootstrap-utilities.rtl.css.map
+    ³   ³       ³       bootstrap-utilities.rtl.min.css
+    ³   ³       ³       bootstrap-utilities.rtl.min.css.map
+    ³   ³       ³       bootstrap.css
+    ³   ³       ³       bootstrap.css.map
+    ³   ³       ³       bootstrap.min.css
+    ³   ³       ³       bootstrap.min.css.map
+    ³   ³       ³       bootstrap.rtl.css
+    ³   ³       ³       bootstrap.rtl.css.map
+    ³   ³       ³       bootstrap.rtl.min.css
+    ³   ³       ³       bootstrap.rtl.min.css.map
+    ³   ³       ³       
+    ³   ³       ÀÄÄÄjs
+    ³   ³               bootstrap.bundle.js
+    ³   ³               bootstrap.bundle.js.map
+    ³   ³               bootstrap.bundle.min.js
+    ³   ³               bootstrap.bundle.min.js.map
+    ³   ³               bootstrap.esm.js
+    ³   ³               bootstrap.esm.js.map
+    ³   ³               bootstrap.esm.min.js
+    ³   ³               bootstrap.esm.min.js.map
+    ³   ³               bootstrap.js
+    ³   ³               bootstrap.js.map
+    ³   ³               bootstrap.min.js
+    ³   ³               bootstrap.min.js.map
+    ³   ³               
+    ³   ÃÄÄÄjquery
+    ³   ³   ³   LICENSE.txt
+    ³   ³   ³   
+    ³   ³   ÀÄÄÄdist
+    ³   ³           jquery.js
+    ³   ³           jquery.min.js
+    ³   ³           jquery.min.map
+    ³   ³           
+    ³   ÃÄÄÄjquery-validation
+    ³   ³   ³   LICENSE.md
+    ³   ³   ³   
+    ³   ³   ÀÄÄÄdist
+    ³   ³           additional-methods.js
+    ³   ³           additional-methods.min.js
+    ³   ³           jquery.validate.js
+    ³   ³           jquery.validate.min.js
+    ³   ³           
+    ³   ÀÄÄÄjquery-validation-unobtrusive
+    ³           jquery.validate.unobtrusive.js
+    ³           jquery.validate.unobtrusive.min.js
+    ³           LICENSE.txt
+    ³           
+    ÀÄÄÄobj
+        ÃÄÄÄDebug
+        ³   ÀÄÄÄnet8.0
+        ³       ³   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+        ³       ³   SCD-EXPENSE-TRACKER.AssemblyInfo.cs
+        ³       ³   SCD-EXPENSE-TRACKER.AssemblyInfoInputs.cache
+        ³       ³   SCD-EXPENSE-TRACKER.GeneratedMSBuildEditorConfig.editorconfig
+        ³       ³   SCD-EXPENSE-TRACKER.GlobalUsings.g.cs
+        ³       ³   
+        ³       ÃÄÄÄref
+        ³       ÀÄÄÄrefint
+        ÀÄÄÄRelease
+            ÀÄÄÄnet8.0
+                ³   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+                ³   SCD-EXPENSE-TRACKER.AssemblyInfo.cs
+                ³   SCD-EXPENSE-TRACKER.AssemblyInfoInputs.cache
+                ³   SCD-EXPENSE-TRACKER.GeneratedMSBuildEditorConfig.editorconfig
+                ³   SCD-EXPENSE-TRACKER.GlobalUsings.g.cs
+                ³   
+                ÃÄÄÄref
+                ÀÄÄÄrefint
