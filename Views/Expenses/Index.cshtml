@@ -2,84 +2,166 @@
 
 @{
     ViewData["Title"] = "Expenses";
+    var categories = ViewBag.Categories as List<ExpenseTracker.Models.Category> ?? new List<ExpenseTracker.Models.Category>();
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="h3 mb-0">Expenses</h1>
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-4">
     <div>
-        <a class="btn btn-primary me-2" asp-action="Create">Create New</a>
-        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Home</a>
+        <h1 class="mb-1">Expenses</h1>
+        <p style="color: var(--text-secondary);">Track and manage all your expenses</p>
+    </div>
+    <a href="/Expenses/Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i>
+        Add Expense
+    </a>
+</div>
+
+<!-- Summary Cards -->
+<div class="grid grid-cols-3 gap-md mb-4">
+    <div class="card card-gradient">
+        <div class="flex justify-between items-center">
+            <div>
+                <p style="opacity: 0.9; margin-bottom: 0.5rem;">Total</p>
+                <h2 style="margin: 0; color: white;">@Model.TotalAmount.ToString("C")</h2>
+            </div>
+            <i class="fas fa-wallet fa-2x" style="opacity: 0.5;"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="flex justify-between items-center">
+            <div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">This Month</p>
+                <h2 style="margin: 0;">@Model.MonthAmount.ToString("C")</h2>
+            </div>
+            <i class="fas fa-calendar-alt fa-2x" style="color: var(--primary-500);"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="flex justify-between items-center">
+            <div>
+                <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Count</p>
+                <h2 style="margin: 0;">@Model.Expenses.Count()</h2>
+            </div>
+            <i class="fas fa-receipt fa-2x" style="color: #10b981;"></i>
+        </div>
     </div>
 </div>
 
-<div class="row mb-3">
-    <div class="col-md-4">
-        <div class="card text-bg-light mb-2">
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Total</h6>
-                <h4 class="card-title">@Model.TotalAmount.ToString("C")</h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-bg-light mb-2">
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">This Month</h6>
-                <h4 class="card-title">@Model.MonthAmount.ToString("C")</h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <form class="row g-2" method="get" asp-action="Index">
-            <div class="col-12 d-flex gap-2">
+<!-- Filters -->
+<div class="card mb-4">
+    <form method="get" asp-action="Index">
+        <div class="grid grid-cols-4 gap-md">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Search</label>
                 <input class="form-control" type="text" name="q" placeholder="Search description..." value="@Model.Query" />
-                <input class="form-control" type="text" name="category" placeholder="Category" value="@Model.Category" />
             </div>
-            <div class="col-6">
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Category</label>
+                <select class="form-control" name="category">
+                    <option value="">All Categories</option>
+                    @foreach (var cat in categories)
+                    {
+                        <option value="@cat.Name" selected="@(Model.Category == cat.Name)">@cat.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Start Date</label>
                 <input class="form-control" type="date" name="startDate" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" />
             </div>
-            <div class="col-6">
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">End Date</label>
                 <input class="form-control" type="date" name="endDate" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" />
             </div>
-            <div class="col-12 d-flex gap-2">
-                <button type="submit" class="btn btn-primary w-100">Filter</button>
-                <a class="btn btn-outline-secondary w-100" asp-action="Index">Clear</a>
-            </div>
-        </form>
-    </div>
+        </div>
+
+        <div class="flex gap-md mt-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-filter"></i> Apply Filters
+            </button>
+            <a class="btn btn-secondary" asp-action="Index">
+                <i class="fas fa-times"></i> Clear
+            </a>
+        </div>
+    </form>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped align-middle">
-        <thead class="table-light">
-            <tr>
-                <th style="min-width:120px">Date</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th class="text-end" style="min-width:120px">Amount</th>
-                <th class="text-end" style="min-width:140px">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.Expenses)
-        {
-            <tr>
-                <td>@item.Date.ToString("yyyy-MM-dd")</td>
-                <td>@item.Category</td>
-                <td class="text-truncate" style="max-width: 420px;">@item.Description</td>
-                <td class="text-end">@item.Amount.ToString("C")</td>
-                <td class="text-end">
-                    <a class="btn btn-sm btn-outline-primary me-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a class="btn btn-sm btn-outline-secondary me-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
-
-@if (!Model.Expenses.Any())
+<!-- Expenses Table -->
+@if (Model.Expenses.Any())
 {
-    <div class="alert alert-info mt-3">No expenses found. Use the filter or create a new expense.</div>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th style="text-align: right;">Amount</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var expense in Model.Expenses)
+                {
+                    <tr>
+                        <td>@expense.Date.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            <div class="flex items-center gap-sm">
+                                <i class="fas @(expense.CategoryNavigation?.Icon ?? "fa-circle")" 
+                                   style="color: @(expense.CategoryNavigation?.Color ?? "#64748b");"></i>
+                                <span>@(expense.CategoryNavigation?.Name ?? expense.Category ?? "Uncategorized")</span>
+                            </div>
+                        </td>
+                        <td>@(expense.Description ?? "-")</td>
+                        <td style="text-align: right; font-weight: 600; color: #ef4444;">
+                            -@expense.Amount.ToString("C")
+                        </td>
+                        <td style="text-align: right;">
+                            <div class="flex gap-sm justify-end">
+                                <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@expense.Id">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@expense.Id">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@expense.Id" method="post" style="display: inline;" onsubmit="return confirm('Delete this expense?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="card text-center" style="padding: 3rem;">
+        <i class="fas fa-receipt fa-3x mb-3" style="color: var(--text-tertiary);"></i>
+        <h3>No Expenses Found</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+            @if (!string.IsNullOrEmpty(Model.Query) || !string.IsNullOrEmpty(Model.Category) || Model.StartDate.HasValue || Model.EndDate.HasValue)
+            {
+                <text>Try adjusting your filters or</text>
+            }
+            else
+            {
+                <text>Start tracking your expenses by adding your first one</text>
+            }
+        </p>
+        <a href="/Expenses/Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            Add Your First Expense
+        </a>
+    </div>
 }

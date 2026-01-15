@@ -1,10 +1,10 @@
 ﻿{
-  "$schema": "[http://json.schemastore.org/launchsettings.json](http://json.schemastore.org/launchsettings.json)",
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "[http://localhost:0](http://localhost:0)",
+      "applicationUrl": "http://localhost:5000", // <--- FIXED PORT
       "sslPort": 0
     }
   },
@@ -13,9 +13,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "",
-      // Use a free port dynamically assigned by setting port to 0
-      "applicationUrl": "[http://localhost:0](http://localhost:0)",
+      "applicationUrl": "http://localhost:5000", // <--- FIXED PORT
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

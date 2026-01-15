@@ -1,0 +1,242 @@
+@model ExpenseTracker.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+    <div>
+        <h1 class="text-2xl font-semibold mb-1">Dashboard</h1>
+        <p class="text-gray-500">Welcome back! Here's your financial overview.</p>
+    </div>
+    <a href="/Expenses/Create" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded shadow hover:bg-indigo-700 transition">
+        <i class="fas fa-plus"></i> Add Expense
+    </a>
+</div>
+
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 text-white p-4 rounded-lg shadow flex justify-between items-center">
+        <div>
+            <p class="opacity-90 mb-1">Total Expenses</p>
+            <h2 class="text-xl font-bold">@Model.TotalExpenses.ToString("C")</h2>
+        </div>
+        <i class="fas fa-wallet fa-2x opacity-50"></i>
+    </div>
+
+    <div class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+        <div>
+            <p class="text-gray-500 mb-1">This Month</p>
+            <h2 class="text-lg font-semibold">@Model.MonthExpenses.ToString("C")</h2>
+            @if (Model.MonthChangePercentage != 0)
+            {
+            <small class="flex items-center gap-1 text-sm" style="color:@(Model.MonthChangePercentage > 0 ? "#ef4444" : "#10b981");">
+                <i class="fas fa-arrow-@(Model.MonthChangePercentage > 0 ? "up" : "down")"></i>
+                @Math.Abs(Model.MonthChangePercentage).ToString("F1")% from last month
+            </small>
+            }
+        </div>
+        <i class="fas fa-calendar-alt fa-2x text-indigo-600"></i>
+    </div>
+
+    <div class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+        <div>
+            <p class="text-gray-500 mb-1">This Week</p>
+            <h2 class="text-lg font-semibold">@Model.WeekExpenses.ToString("C")</h2>
+        </div>
+        <i class="fas fa-chart-line fa-2x text-green-600"></i>
+    </div>
+
+    <div class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+        <div>
+            <p class="text-gray-500 mb-1">Today</p>
+            <h2 class="text-lg font-semibold">@Model.TodayExpenses.ToString("C")</h2>
+        </div>
+        <i class="fas fa-clock fa-2x text-yellow-500"></i>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Category Breakdown -->
+    <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-semibold">Category Breakdown</h3>
+            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-sm rounded">This Month</span>
+        </div>
+        <div class="h-72">
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Monthly Trends -->
+    <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-semibold">Spending Trends</h3>
+            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-sm rounded">Last 6 Months</span>
+        </div>
+        <div class="h-72">
+            <canvas id="trendsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Top Categories & Recent Expenses -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Top Categories -->
+    <div class="bg-white rounded-lg shadow p-4">
+        <h3 class="text-lg font-semibold mb-3">Top Categories</h3>
+        @if (Model.TopCategories.Any())
+        {
+        <div class="space-y-4">
+            @foreach (var category in Model.TopCategories)
+                {
+            <div>
+                <div class="flex justify-between items-center mb-1">
+                    <div class="flex items-center gap-2">
+                        <i class="fas @category.CategoryIcon" style="color:@category.CategoryColor;"></i>
+                        <span class="font-medium">@category.CategoryName</span>
+                    </div>
+                    <span class="font-semibold">@category.TotalAmount.ToString("C")</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden mb-1">
+                    <div class="h-full rounded-full" style="width:@category.Percentage.ToString("F1")%; background:@category.CategoryColor;"></div>
+                </div>
+                <small class="text-gray-400">@category.ExpenseCount expenses · @category.Percentage.ToString("F1")%</small>
+            </div>
+                }
+        </div>
+        }
+        else
+        {
+        <p class="text-gray-400 text-center py-8">No expenses this month</p>
+        }
+    </div>
+
+    <!-- Recent Expenses -->
+    <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-semibold">Recent Expenses</h3>
+            <a href="/Expenses" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200 transition">View All</a>
+        </div>
+        @if (Model.RecentExpenses.Any())
+        {
+        <div class="space-y-2">
+            @foreach (var expense in Model.RecentExpenses)
+                {
+            <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                <div class="flex items-center gap-2">
+                    <i class="fas @(expense.CategoryNavigation?.Icon ?? "fa-circle")" style="color:@(expense.CategoryNavigation?.Color ?? "#64748b"); width:20px;"></i>
+                    <div>
+                        <div class="font-medium">@expense.Description ?? "No description"</div>
+                        <small class="text-gray-400">@expense.Date.ToString("MMM dd, yyyy") · @(expense.CategoryNavigation?.Name ?? expense.Category ?? "Uncategorized")</small>
+                    </div>
+                </div>
+                <span class="font-semibold text-red-500">-@expense.Amount.ToString("C")</span>
+            </div>
+                }
+        </div>
+        }
+        else
+        {
+        <p class="text-gray-400 text-center py-8">No recent expenses</p>
+        }
+    </div>
+</div>
+
+<!-- Budget Status -->
+@if (Model.BudgetStatuses.Any())
+{
+<div class="bg-white rounded-lg shadow p-4 mb-6">
+    <div class="flex justify-between items-center mb-3">
+        <h3 class="text-lg font-semibold">Budget Status</h3>
+        <a href="/Budgets" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200 transition">Manage Budgets</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        @foreach (var budget in Model.BudgetStatuses)
+            {
+        <div class="p-4 rounded border-l-4" style="border-color:@budget.CategoryColor; background:#f9fafb;">
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-medium">@budget.CategoryName</span>
+                <span class="font-semibold" style="color:@(budget.IsOverBudget ? "#ef4444" : "black")">
+                    @budget.SpentAmount.ToString("C") / @budget.BudgetAmount.ToString("C")
+                </span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-gray-200 mb-1">
+                <div class="h-full rounded-full" style="width:@Math.Min(budget.PercentageUsed, 100).ToString("F1")%; background:@(budget.IsOverBudget ? "#ef4444" : budget.IsNearLimit ? "#f59e0b" : "#10b981");"></div>
+            </div>
+            <div class="flex justify-between text-sm text-gray-500">
+                <span>@budget.PercentageUsed.ToString("F1")% used</span>
+                @if (budget.IsOverBudget)
+                        {
+                <span class="text-red-500 font-medium"><i class="fas fa-exclamation-triangle"></i> Over budget</span>
+                        }
+                        else if (budget.IsNearLimit)
+                        {
+                <span class="text-yellow-500 font-medium"><i class="fas fa-exclamation-circle"></i> Near limit</span>
+                        }
+                        else
+                        {
+                <span class="text-green-600">@budget.RemainingAmount.ToString("C") remaining</span>
+                        }
+            </div>
+        </div>
+            }
+    </div>
+</div>
+}
+
+@section Scripts {
+    <script>
+        // Category Breakdown Chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        const categoryData = @Html.Raw(Json.Serialize(Model.TopCategories.Select(c => new { label = c.CategoryName, value = c.TotalAmount, color = c.CategoryColor })));
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: categoryData.map(d => d.label),
+                datasets: [{
+                    data: categoryData.map(d => d.value),
+                    backgroundColor: categoryData.map(d => d.color),
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { padding: 15, usePointStyle: true } } }
+            }
+        });
+
+        // Monthly Trends Chart
+        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+        const trendsData = @Html.Raw(Json.Serialize(Model.MonthlyTrends));
+        new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: trendsData.map(d => d.monthName),
+                datasets: [{
+                    label: 'Expenses',
+                    data: trendsData.map(d => d.amount),
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99,102,241,0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) { return '$' + value.toLocaleString(); }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

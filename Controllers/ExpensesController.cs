@@ -55,6 +55,7 @@ namespace ExpenseTracker.Controllers
                 Query = q
             };
 
+            ViewBag.Categories = await _context.Categories.Where(c => c.IsActive).ToListAsync();
             return View(vm);
         }
 

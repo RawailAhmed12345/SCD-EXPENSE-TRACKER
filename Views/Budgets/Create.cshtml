@@ -1,0 +1,84 @@
+@model ExpenseTracker.Models.Budget
+
+@{
+    ViewData["Title"] = "Create Budget";
+    var categories = ViewBag.Categories as List<ExpenseTracker.Models.Category>;
+    var now = DateTime.Now;
+}
+
+<div class="mb-4">
+    <h1>Create Budget</h1>
+    <p style="color: var(--text-secondary);">Set a monthly spending limit for a category</p>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-control" required>
+                <option value="">Select a category...</option>
+                @if (categories != null)
+                {
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Id">
+                            @category.Name
+                        </option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="form-error"></span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-md">
+            <div class="form-group">
+                <label asp-for="Month" class="form-label">Month</label>
+                <select asp-for="Month" class="form-control" required>
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i" selected="@(i == now.Month)">
+                            @(new DateTime(2000, i, 1).ToString("MMMM"))
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="Month" class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Year" class="form-label">Year</label>
+                <select asp-for="Year" class="form-control" required>
+                    @for (int i = now.Year - 1; i <= now.Year + 1; i++)
+                    {
+                        <option value="@i" selected="@(i == now.Year)">@i</option>
+                    }
+                </select>
+                <span asp-validation-for="Year" class="form-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Amount" class="form-label">Budget Amount</label>
+            <input asp-for="Amount" class="form-control" type="number" step="0.01" min="0" required />
+            <span asp-validation-for="Amount" class="form-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AlertThreshold" class="form-label">Alert Threshold (%)</label>
+            <input asp-for="AlertThreshold" class="form-control" type="number" min="0" max="100" value="80" required />
+            <small style="color: var(--text-tertiary);">You'll be alerted when spending reaches this percentage</small>
+            <span asp-validation-for="AlertThreshold" class="form-error"></span>
+        </div>
+
+        <div class="flex gap-md mt-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Create Budget
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

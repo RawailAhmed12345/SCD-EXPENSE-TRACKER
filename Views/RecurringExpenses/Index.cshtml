@@ -1,0 +1,105 @@
+@model List<ExpenseTracker.Models.RecurringExpense>
+
+@{
+    ViewData["Title"] = "Recurring Expenses";
+}
+
+<div class="flex justify-between items-center mb-4">
+    <div>
+        <h1 class="mb-1">Recurring Expenses</h1>
+        <p style="color: var(--text-secondary);">Manage your recurring bills and subscriptions</p>
+    </div>
+    <a href="/RecurringExpenses/Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i>
+        Add Recurring Expense
+    </a>
+</div>
+
+@if (Model.Any())
+{
+    <div class="grid grid-cols-2 gap-md">
+        @foreach (var recurring in Model)
+        {
+            <div class="card">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="flex items-center gap-md">
+                        <div style="width: 50px; height: 50px; border-radius: var(--radius-md); background: @(recurring.Category?.Color ?? "#64748b"); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                            <i class="fas @(recurring.Category?.Icon ?? "fa-redo")"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">@recurring.Description</h4>
+                            <small style="color: var(--text-tertiary);">@(recurring.Category?.Name ?? "Uncategorized")</small>
+                        </div>
+                    </div>
+                    <span class="badge @(recurring.IsActive ? "badge-success" : "badge-danger")">
+                        @(recurring.IsActive ? "Active" : "Inactive")
+                    </span>
+                </div>
+
+                <div style="padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); margin-bottom: 1rem;">
+                    <div class="grid grid-cols-2 gap-md">
+                        <div>
+                            <small style="color: var(--text-tertiary);">Amount</small>
+                            <div style="font-weight: 600; font-size: 1.25rem;">@recurring.Amount.ToString("C")</div>
+                        </div>
+                        <div>
+                            <small style="color: var(--text-tertiary);">Frequency</small>
+                            <div style="font-weight: 500;">@recurring.Frequency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <div class="flex justify-between mb-1">
+                        <small style="color: var(--text-tertiary);">Start Date</small>
+                        <small>@recurring.StartDate.ToString("MMM dd, yyyy")</small>
+                    </div>
+                    @if (recurring.EndDate.HasValue)
+                    {
+                        <div class="flex justify-between mb-1">
+                            <small style="color: var(--text-tertiary);">End Date</small>
+                            <small>@recurring.EndDate.Value.ToString("MMM dd, yyyy")</small>
+                        </div>
+                    }
+                    @if (recurring.LastGenerated.HasValue)
+                    {
+                        <div class="flex justify-between">
+                            <small style="color: var(--text-tertiary);">Last Generated</small>
+                            <small>@recurring.LastGenerated.Value.ToString("MMM dd, yyyy")</small>
+                        </div>
+                    }
+                </div>
+
+                <div class="flex gap-sm">
+                    <form asp-action="Generate" asp-route-id="@recurring.Id" method="post" style="flex: 1;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-primary" style="width: 100%;">
+                            <i class="fas fa-plus"></i> Generate Now
+                        </button>
+                    </form>
+                    <a href="/RecurringExpenses/Edit/@recurring.Id" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form asp-action="Delete" asp-route-id="@recurring.Id" method="post" onsubmit="return confirm('Delete this recurring expense?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="card text-center" style="padding: 3rem;">
+        <i class="fas fa-redo fa-3x mb-3" style="color: var(--text-tertiary);"></i>
+        <h3>No Recurring Expenses</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Set up recurring expenses for bills and subscriptions</p>
+        <a href="/RecurringExpenses/Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            Add Your First Recurring Expense
+        </a>
+    </div>
+}
