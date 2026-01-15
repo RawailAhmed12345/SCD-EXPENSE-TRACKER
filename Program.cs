@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ExpenseTracker.Data;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,10 @@ builder.WebHost.ConfigureKestrel(options =>
 
 // -------------------- BUILD APP --------------------
 var app = builder.Build();
+
+// -------------------- QUESTPDF LICENSE --------------------
+// MUST be set before generating any PDFs
+QuestPDF.Settings.License = LicenseType.Community;
 
 // -------------------- DATABASE MIGRATION --------------------
 using (var scope = app.Services.CreateScope())
