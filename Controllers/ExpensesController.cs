@@ -18,13 +18,14 @@ namespace ExpenseTracker.Controllers
         }
 
         // GET: Expenses
-        // Supports optional filtering via query string: category, startDate, endDate, q (search)
-        public async Task<IActionResult> Index(string? category, DateTime? startDate, DateTime? endDate, string? q)
+        public async Task<IActionResult> Index(int? categoryId, DateTime? startDate, DateTime? endDate, string? q)
         {
-            var query = _context.Expenses.AsQueryable();
+            var query = _context.Expenses
+                .Include(e => e.CategoryNavigation)
+                .AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(category))
-                query = query.Where(e => e.Category == category);
+            if (categoryId.HasValue)
+                query = query.Where(e => e.CategoryId == categoryId.Value);
 
             if (startDate.HasValue)
                 query = query.Where(e => e.Date >= startDate.Value.Date);
@@ -36,26 +37,32 @@ namespace ExpenseTracker.Controllers
             }
 
             if (!string.IsNullOrWhiteSpace(q))
-                query = query.Where(e => e.Description != null && EF.Functions.Like(e.Description, $"%{q}%"));
+                query = query.Where(e => e.Description != null &&
+                                         EF.Functions.Like(e.Description, $"%{q}%"));
 
-            var items = await query.OrderByDescending(e => e.Date).ToListAsync();
+            var items = await query
+                .OrderByDescending(e => e.Date)
+                .ToListAsync();
 
-            var total = items.Sum(i => i.Amount);
             var now = DateTime.Now;
-            var monthTotal = items.Where(i => i.Date.Year == now.Year && i.Date.Month == now.Month).Sum(i => i.Amount);
 
             var vm = new ExpenseIndexViewModel
             {
                 Expenses = items,
-                TotalAmount = total,
-                MonthAmount = monthTotal,
-                Category = category,
+                TotalAmount = items.Sum(i => i.Amount),
+                MonthAmount = items
+                    .Where(i => i.Date.Month == now.Month && i.Date.Year == now.Year)
+                    .Sum(i => i.Amount),
+                CategoryId = categoryId,
                 StartDate = startDate,
                 EndDate = endDate,
                 Query = q
             };
 
-            ViewBag.Categories = await _context.Categories.Where(c => c.IsActive).ToListAsync();
+            ViewBag.Categories = await _context.Categories
+                .Where(c => c.IsActive)
+                .ToListAsync();
+
             return View(vm);
         }
 
@@ -63,25 +70,48 @@ namespace ExpenseTracker.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var expense = await _context.Expenses.FirstOrDefaultAsync(m => m.Id == id);
+
+            var expense = await _context.Expenses
+                .Include(e => e.CategoryNavigation)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
             if (expense == null) return NotFound();
+
             return View(expense);
         }
 
         // GET: Expenses/Create
-        public IActionResult Create() => View();
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Categories = await _context.Categories
+                .Where(c => c.IsActive)
+                .ToListAsync();
+
+            return View();
+        }
 
         // POST: Expenses/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Date,Category,Description,Amount")] Expense expense)
+        public async Task<IActionResult> Create(Expense expense)
         {
             if (ModelState.IsValid)
             {
+                var category = await _context.Categories.FindAsync(expense.CategoryId);
+                if (category == null) return BadRequest();
+
+                // Optional legacy value
+                expense.Category = category.Name;
+
                 _context.Add(expense);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Categories = await _context.Categories
+                .Where(c => c.IsActive)
+                .ToListAsync();
+
             return View(expense);
         }
 
@@ -89,15 +119,21 @@ namespace ExpenseTracker.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
+
             var expense = await _context.Expenses.FindAsync(id);
             if (expense == null) return NotFound();
+
+            ViewBag.Categories = await _context.Categories
+                .Where(c => c.IsActive)
+                .ToListAsync();
+
             return View(expense);
         }
 
         // POST: Expenses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Category,Description,Amount")] Expense expense)
+        public async Task<IActionResult> Edit(int id, Expense expense)
         {
             if (id != expense.Id) return NotFound();
 
@@ -105,6 +141,10 @@ namespace ExpenseTracker.Controllers
             {
                 try
                 {
+                    var category = await _context.Categories.FindAsync(expense.CategoryId);
+                    if (category != null)
+                        expense.Category = category.Name;
+
                     _context.Update(expense);
                     await _context.SaveChangesAsync();
                 }
@@ -116,6 +156,11 @@ namespace ExpenseTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Categories = await _context.Categories
+                .Where(c => c.IsActive)
+                .ToListAsync();
+
             return View(expense);
         }
 
@@ -123,8 +168,13 @@ namespace ExpenseTracker.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var expense = await _context.Expenses.FirstOrDefaultAsync(m => m.Id == id);
+
+            var expense = await _context.Expenses
+                .Include(e => e.CategoryNavigation)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
             if (expense == null) return NotFound();
+
             return View(expense);
         }
 

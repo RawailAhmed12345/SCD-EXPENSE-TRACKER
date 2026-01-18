@@ -2,11 +2,13 @@
 
 @{
     ViewData["Title"] = "Create Expense";
+    var categories = ViewBag.Categories as List<ExpenseTracker.Models.Category>;
 }
 
 <h2>Create New Expense</h2>
 
 <form asp-action="Create" method="post" class="mt-3">
+
     <div class="mb-3">
         <label asp-for="Date" class="form-label"></label>
         <input asp-for="Date" class="form-control" type="date" />
@@ -14,9 +16,15 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Category" class="form-label"></label>
-        <input asp-for="Category" class="form-control" />
-        <span asp-validation-for="Category" class="text-danger"></span>
+        <label asp-for="CategoryId" class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-control">
+            <option value="">-- Select Category --</option>
+            @foreach (var c in categories!)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -33,6 +41,7 @@
 
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
 </form>
 
 @section Scripts {

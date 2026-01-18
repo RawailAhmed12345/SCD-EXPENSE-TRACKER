@@ -25,13 +25,13 @@ namespace ExpenseTracker.Controllers
 
             var startOfMonth = new DateTime(now.Year, now.Month, 1);
             var expenses = await _context.Expenses
-                .Where(e => e.Date >= startOfMonth)
+                .Where(e => e.Date >= startOfMonth && e.CategoryId.HasValue)
                 .ToListAsync();
 
             var budgetStatuses = budgets.Select(b =>
             {
                 var spent = expenses
-                    .Where(e => e.CategoryId == b.CategoryId)
+                    .Where(e => e.CategoryId.Value == b.CategoryId)
                     .Sum(e => e.Amount);
 
                 var percentageUsed = b.Amount > 0 ? (spent / b.Amount) * 100 : 0;

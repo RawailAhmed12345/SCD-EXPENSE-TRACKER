@@ -6,15 +6,14 @@ namespace ExpenseTracker.Models
     {
         public int Id { get; set; }
 
-        [DataType(DataType.Date)]
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; } = DateTime.UtcNow;
 
-        // Keep for backward compatibility, but prefer CategoryId
         [StringLength(100)]
-        public string? Category { get; set; }
+        public string? Category { get; set; } // Legacy name
 
-        // New foreign key to Category table
+        // Nullable to safely handle nulls in database
         public int? CategoryId { get; set; }
 
         [StringLength(500)]
@@ -24,9 +23,8 @@ namespace ExpenseTracker.Models
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
 
-        // New fields
         [StringLength(500)]
-        public string? Tags { get; set; } // Comma-separated tags
+        public string? Tags { get; set; }
 
         [StringLength(2000)]
         public string? Notes { get; set; }
@@ -39,8 +37,9 @@ namespace ExpenseTracker.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        // Navigation properties
-        public Models.Category? CategoryNavigation { get; set; }
+        // Navigation
+        public Category? CategoryNavigation { get; set; }
+
         public ICollection<ExpenseAttachment> Attachments { get; set; } = new List<ExpenseAttachment>();
     }
 }

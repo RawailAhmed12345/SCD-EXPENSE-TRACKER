@@ -20,9 +20,8 @@ namespace ExpenseTracker.Models
         public decimal Amount { get; set; }
 
         [Range(0, 100)]
-        public int AlertThreshold { get; set; } = 80; // Alert when spending reaches this percentage
+        public int AlertThreshold { get; set; } = 80;
 
-        // Navigation property
         public Category? Category { get; set; }
     }
 }

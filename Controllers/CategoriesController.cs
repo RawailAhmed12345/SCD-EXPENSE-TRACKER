@@ -17,31 +17,29 @@ namespace ExpenseTracker.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
+            // Get all active categories
             var categories = await _context.Categories
                 .Where(c => c.IsActive)
                 .ToListAsync();
 
-            // Get expense counts for each category
-            var expenses = await _context.Expenses.ToListAsync();
-            var categoryCounts = expenses
+            // Count expenses per category safely (skip null CategoryId)
+            var categoryCounts = await _context.Expenses
                 .Where(e => e.CategoryId.HasValue)
-                .GroupBy(e => e.CategoryId.Value)
-                .ToDictionary(g => g.Key, g => g.Count());
+                .GroupBy(e => e.CategoryId.Value) // Safe cast to int
+                .ToDictionaryAsync(g => g.Key, g => g.Count());
 
             ViewBag.CategoryCounts = categoryCounts;
+
             return View(categories);
         }
 
         // GET: Categories/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         // POST: Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Icon,Color")] Category category)
+        public async Task<IActionResult> Create(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -60,13 +58,8 @@ namespace ExpenseTracker.Controllers
             if (id == null) return NotFound();
 
             var category = await _context.Categories.FindAsync(id);
-            if (category == null) return NotFound();
-
-            // Don't allow editing default categories
-            if (category.IsDefault)
-            {
+            if (category == null || category.IsDefault)
                 return RedirectToAction(nameof(Index));
-            }
 
             return View(category);
         }
@@ -74,29 +67,15 @@ namespace ExpenseTracker.Controllers
         // POST: Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Icon,Color,IsDefault,IsActive")] Category category)
+        public async Task<IActionResult> Edit(int id, Category category)
         {
-            if (id != category.Id) return NotFound();
-
-            // Don't allow editing default categories
-            if (category.IsDefault)
-            {
+            if (id != category.Id || category.IsDefault)
                 return RedirectToAction(nameof(Index));
-            }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!await _context.Categories.AnyAsync(e => e.Id == category.Id))
-                        return NotFound();
-                    throw;
-                }
+                _context.Update(category);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -110,7 +89,6 @@ namespace ExpenseTracker.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category != null && !category.IsDefault)
             {
-                // Soft delete
                 category.IsActive = false;
                 _context.Update(category);
                 await _context.SaveChangesAsync();
@@ -118,7 +96,7 @@ namespace ExpenseTracker.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // API endpoint for autocomplete
+        // GET: Categories/GetCategories (JSON API)
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {

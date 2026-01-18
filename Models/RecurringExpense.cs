@@ -2,13 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Models
 {
-    public enum RecurringFrequency
-    {
-        Daily,
-        Weekly,
-        Monthly,
-        Yearly
-    }
+    public enum RecurringFrequency { Daily, Weekly, Monthly, Yearly }
 
     public class RecurringExpense
     {
@@ -40,10 +34,9 @@ namespace ExpenseTracker.Models
         [DataType(DataType.Date)]
         public DateTime? LastGenerated { get; set; }
 
-        public int DayOfMonth { get; set; } = 1; // For monthly: which day (1-31)
-        public DayOfWeek DayOfWeek { get; set; } = DayOfWeek.Monday; // For weekly
+        public int DayOfMonth { get; set; } = 1;
+        public DayOfWeek DayOfWeek { get; set; } = DayOfWeek.Monday;
 
-        // Navigation property
         public Category? Category { get; set; }
     }
 }
